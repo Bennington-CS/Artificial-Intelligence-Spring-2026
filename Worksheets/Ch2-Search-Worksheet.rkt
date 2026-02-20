@@ -144,11 +144,6 @@
 
 ;;; Modify the code in bfs-shortest-path above to create dfs-path.  Add your own design information
 ;;; in the comments (signature, purpose, template, tests) above your function.
-;;;
-;;; Questions to answer in addition:
-;;; - Will dfs-path always give the same result as bfs-shortest-path? Why or why not?
-;;; - How could you ensure dfs-path and bfs-shortest-path always give the same results?
-;;; - What changes between a queue (FIFO) and a stack (LIFO) in these functions?
 #;
 (define (dfs-path matrix start goal)
   ...)
