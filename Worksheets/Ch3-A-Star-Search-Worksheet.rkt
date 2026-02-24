@@ -220,6 +220,10 @@
 ;;; Find the shortest path from start to goal using A* algorithm. Uses a priority queue (sorted list)
 ;;; to explore nodes with lowest f-cost first, where f = g (cost from start) + h (heuristic to goal).
 ;;;
+;;; Note: The "stack" is actually a list that's repeatedly sorted.  The book calls it a stack, I
+;;; think, because you push neighbours into it, and pop nodes off of it.  But since you sort it, it
+;;; is functionally a priority queue, which is not really a stack.  But whatever.
+;;;
 ;;; Algorithm (as outlined in book):
 ;;; 1. Add root node to stack
 ;;; 2. Is stack empty? If yes, go to step 3; else go to step 4
