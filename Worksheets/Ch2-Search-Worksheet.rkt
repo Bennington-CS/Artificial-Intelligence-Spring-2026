@@ -153,3 +153,18 @@
 (define (dfs-path matrix start goal)
   ...)
 
+#|
+Question 1: Will dfs-path always give the same result as bfs-shortest-path? Why or why not?
+
+Answer:
+
+Question 2: How could you ensure dfs-path and bfs-shortest-path always give the same results?
+
+Answer:
+
+Question 3: What changes between a queue (FIFO) and a stack (LIFO) in these functions?
+
+Answer:
+
+|#
+
