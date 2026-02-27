@@ -72,7 +72,7 @@
 ;;;                 (_ _ _ _ _ _ x _ _)
 ;;;                 (_ _ _ _ _ _ _ x _)
 ;;;                 (_ _ _ _ _ _ _ _ x))
-;;;               "Empty board generates 9 boards with x in each position")
+;;;               "Empty board should generate 9 boards with x in each position")
 ;;;
 ;;; (check-equal? (generate-next-boards '(x _ _ _ _ _ _ _ _))
 ;;;               '((x o _ _ _ _ _ _ _)
@@ -83,7 +83,7 @@
 ;;;                 (x _ _ _ _ _ o _ _)
 ;;;                 (x _ _ _ _ _ _ o _)
 ;;;                 (x _ _ _ _ _ _ _ o))
-;;;               "After x's move, o has 8 possible moves")
+;;;               "After x's move, o should have 8 possible moves")
 ;;;
 #;
 (define (generate-next-boards board)
@@ -101,15 +101,15 @@
 ;;; board : list of 9 symbols, each 'x, 'o, or '_
 ;;;
 ;;; (check-equal? (check-winner '(x x x _ _ _ _ _ _)) 'x
-;;;               "x wins with top row")
+;;;               "x should win with top row")
 ;;; (check-equal? (check-winner '(o _ _ o _ _ o _ _)) 'o
-;;;               "o wins with left column")
+;;;               "o should win with left column")
 ;;; (check-equal? (check-winner '(x _ _ _ x _ _ _ x)) 'x
-;;;               "x wins with diagonal")
+;;;               "x should win with diagonal")
 ;;; (check-equal? (check-winner '(x o x o x o o x o)) 'draw
-;;;               "Full board with no winner is a draw")
+;;;               "Full board with no winner should be a draw")
 ;;; (check-equal? (check-winner '(x o _ _ _ _ _ _ _)) '_
-;;;               "Game in progress produces '_")
+;;;               "Game in progress should produce '_")
 ;;;
 #;
 (define (check-winner board)
@@ -123,11 +123,11 @@
 ;;; board : list of 9 symbols, each 'x, 'o, or '_
 ;;;
 ;;; (check-equal? (evaluate-board '(x x x _ _ _ _ _ _)) 10
-;;;               "x win scores +10")
+;;;               "x win should score +10")
 ;;; (check-equal? (evaluate-board '(o o o _ _ _ _ _ _)) -10
-;;;               "o win scores -10")
+;;;               "o win should score -10")
 ;;; (check-equal? (evaluate-board '(x o x o x o o x o)) 0
-;;;               "draw scores 0")
+;;;               "Draw should score 0")
 ;;;
 #;
 (define (evaluate-board board)
@@ -152,10 +152,10 @@
 ;;;
 ;;; (check-equal? (build-game-tree '(x x x _ _ _ _ _ _) 1)
 ;;;               '((x x x _ _ _ _ _ _) ())
-;;;               "Terminal board (x wins) has no children")
+;;;               "Terminal board (x wins) should have no children")
 ;;; (check-equal? (build-game-tree '(_ _ _ _ _ _ _ _ _) 0)
 ;;;               '((_ _ _ _ _ _ _ _ _) ())
-;;;               "Depth 0 produces just the board with no children")
+;;;               "Depth 0 should produce just the board with no children")
 ;;;
 #;
 (define (build-game-tree board depth)
@@ -210,7 +210,7 @@
 ;;        _ _ _
 ;; (check-equal? (minimax '(x x _ o o _ _ _ _) 0 #t)
 ;;               '(#f 0)
-;;               "At depth 0, produces evaluation with no move")
+;;               "At depth 0, should produce evaluation with no move")
 
 ;; Test: x can win immediately (2 pieces = even, x's turn)
 ;; Board: x x _
@@ -240,7 +240,7 @@
 ;;        _ _ x
 ;; (check-equal? (car (minimax '(x o _ _ o _ _ _ x) 2 #t))
 ;;               7
-;;               "x must block o's middle column at position 7")
+;;               "x should block o's middle column at position 7")
 
 ;; Test: o should take winning move (3 pieces = odd, o's turn)
 ;; Board: x _ _
@@ -259,7 +259,7 @@
 ;;        _ _ _
 ;; (check-equal? (minimax '(x x x _ _ _ _ _ _) 3 #t)
 ;;               '(#f 10)
-;;               "x already won, no move needed")
+;;               "x already won, no move should be needed")
 
 ;; Test: terminal state - o already won
 ;; Board: o o o
@@ -267,7 +267,7 @@
 ;;        _ _ _
 ;; (check-equal? (minimax '(o o o _ _ _ _ _ _) 3 #t)
 ;;               '(#f -10)
-;;               "o already won, no move needed")
+;;               "o already won, no move should be needed")
 
 ;; Test: draw board
 ;; Board: x o x
@@ -275,4 +275,4 @@
 ;;        o x o
 ;; (check-equal? (minimax '(x o x o x o o x o) 3 #t)
 ;;               '(#f 0)
-;;               "Draw board scores 0")
+;;               "Draw board should score 0")

@@ -156,7 +156,7 @@
 (check-equal? (passable? map-grid '(0 0)) #t
               "Goal position should be passable")
 (check-equal? (passable? map-grid '(1 1)) #f
-              "Wall should not not passable")
+              "Wall should not be passable")
 (check-equal? (passable? map-grid '(2 2)) #t
               "Start position should be passable")
 
@@ -386,12 +386,12 @@
                       (loop new-stack new-visited new-parent-map)))))))))
 
 (check-equal? (a-star map-grid '(0 0) '(0 0)) '((0 0))
-              "A* handles start equals goal")
+              "A* should handle start equals goal")
 (check-equal? (a-star map-grid '(0 0) '(0 1)) '((0 0) (0 1))
-              "A* finds path between adjacent positions")
+              "A* should find path between adjacent positions")
 (check-equal? (car (a-star map-grid '(2 2) '(0 0))) '(2 2)
-              "Path starts at start position")
+              "Path should start at start position")
 (check-equal? (last (a-star map-grid '(2 2) '(0 0))) '(0 0)
-              "Path ends at goal position")
+              "Path should end at goal position")
 (check-equal? (a-star map-grid '(2 2) '(1 2)) #f
-              "A* returns #f when no path exists to blocked position")
+              "A* should return #f when no path exists to blocked position")
