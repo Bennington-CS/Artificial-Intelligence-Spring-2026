@@ -69,9 +69,9 @@
 ;;; node    : a number representing the node index to find neighbours for
 ;;;
 ;;; (check-equal? (get-neighbours map-matrix 3)  '(0 4 6)
-;;;               "D connects to A, E, G")
+;;;               "D should connect to A, E, G")
 ;;; (check-equal? (get-neighbours map-matrix 14) '(11 13)
-;;;               "O connects to L, N")
+;;;               "O should connect to L, N")
 ;;;
 (define (get-neighbours matrix node)
   (let ([row (list-ref matrix node)])
@@ -82,9 +82,9 @@
       index)))
 
 (check-equal? (get-neighbours map-matrix 3)  '(0 4 6)
-              "D connects to A, E, G")
+              "D should connect to A, E, G")
 (check-equal? (get-neighbours map-matrix 14) '(11 13)
-              "O connects to L, N")
+              "O should connect to L, N")
 
 ;;; Syntax help: Here is an example of how for/list interacts with #:when
 #;
@@ -105,9 +105,9 @@
 ;;;       "")
 ;;;
 ;;; (check-equal? (pretty-print '(0 1 4)) "A -> B -> E"
-;;;               "Path from A -> E via B")
+;;;               "Path from A -> E should be via B")
 ;;; (check-equal? (pretty-print #f) ""
-;;;               "No path produces empty string")
+;;;               "No path should produce empty string")
 ;;;
 (define (pretty-print result)
   (if result
@@ -116,9 +116,9 @@
       ""))
 
 (check-equal? (pretty-print '(0 1 4)) "A -> B -> E"
-              "Path from A -> E via B")
+              "Path from A -> E should be via B")
 (check-equal? (pretty-print #f) ""
-              "No path produces empty string")
+              "No path should produce empty string")
 
 ;;;;
 ;;;; Definitions
@@ -155,7 +155,7 @@
 ;;; (check-equal? (bfs-shortest-path map-matrix 5 5) '(5)
 ;;;               "Path from a node to itself should be just that node")
 ;;; (check-equal? (bfs-shortest-path '((0 1) (1 0) (0 0)) 0 2) #f
-;;;               "No path to disconnected node")
+;;;               "Should be no path to disconnected node")
 ;;;
 (define (bfs-shortest-path matrix start goal)
   ;; loop:    named let for the bfs loop
@@ -224,7 +224,7 @@ Result: (0 1 4) → "A -> B -> E"
 (check-equal? (bfs-shortest-path map-matrix 5 5) '(5)
               "Path from a node to itself should be just that node")
 (check-equal? (bfs-shortest-path '((0 1) (1 0) (0 0)) 0 2) #f
-              "No path to disconnected node")
+              "Should be no path to disconnected node")
 
 ;;; Run it
 (pretty-print (bfs-shortest-path map-matrix 0 4))
@@ -269,11 +269,11 @@ Result: (0 1 4) → "A -> B -> E"
 ;;; - If stack becomes empty, no path exists
 ;;;
 ;;; (check-equal? (dfs-path map-matrix 0 4) '(0 1 4)
-;;;               "DFS finds a path from A -> E (may not be shortest)")
+;;;               "DFS should find a path from A -> E (may not be shortest)")
 ;;; (check-equal? (dfs-path map-matrix 5 5) '(5)
 ;;;               "Path from node to itself should be just that node")
 ;;; (check-equal? (dfs-path '((0 1) (1 0) (0 0)) 0 2) #f
-;;;               "No path to disconnected node")
+;;;               "Should be no path to disconnected node")
 ;;;
 (define (dfs-path matrix start goal)
   ;; loop:    named let for the dfs loop
@@ -312,11 +312,11 @@ Result: (0 1 4) → "A -> B -> E"
 
 ;;; Tests
 (check-equal? (dfs-path map-matrix 0 4) '(0 1 4)
-              "DFS finds a path from A -> E")
+              "DFS should find a path from A -> E")
 (check-equal? (dfs-path map-matrix 5 5) '(5)
               "Path from node to itself should be just that node")
 (check-equal? (dfs-path '((0 1) (1 0) (0 0)) 0 2) #f
-              "No path to disconnected node")
+              "Should be no path to disconnected node")
 
 ;;; Run it
 (pretty-print (dfs-path map-matrix 0 4))

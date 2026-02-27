@@ -60,10 +60,10 @@
 ;;; matrix  : a list of lists representing an adjacency matrix
 ;;; node    : a number representing the node index to find neighbours for
 ;;;
-;;; (check-equal? (get-neighbours map-matrix 3) '(0 4 6)
-;;;               "D connects to A, E, G")
+;;; (check-equal? (get-neighbours map-matrix 3)  '(0 4 6)
+;;;               "D should connect to A, E, G")
 ;;; (check-equal? (get-neighbours map-matrix 14) '(11 13)
-;;;               "O connects to L, N")
+;;;               "O should connect to L, N")
 ;;;
 #;
 (define (get-neighbours matrix node)
@@ -81,9 +81,9 @@
 ;;;       "")
 ;;;
 ;;; (check-equal? (pretty-print '(0 1 4)) "A -> B -> E"
-;;;               "Path from A -> E via B")
+;;;               "Path from A -> E should be via B")
 ;;; (check-equal? (pretty-print #f) ""
-;;;               "No path produces empty string")
+;;;               "No path should produce empty string")
 ;;;
 #;
 (define (pretty-print result)
@@ -130,7 +130,7 @@
 ;;; (check-equal? (bfs-shortest-path map-matrix 5 5) '(5)
 ;;;               "Path from node to itself should be just that node")
 ;;; (check-equal? (bfs-shortest-path '((0 1) (1 0) (0 0)) 0 2) #f
-;;;               "No path to disconnected node")
+;;;               "Should be no path to disconnected node")
 ;;;
 #;
 (define (bfs-shortest-path matrix start goal)

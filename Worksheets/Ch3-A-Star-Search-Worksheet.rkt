@@ -63,13 +63,13 @@
 ;;; pos2 : (row col) ending position (must be adjacent)
 ;;;
 ;;; (check-equal? (movement-cost '(0 0) '(0 1)) 1
-;;;               "Moving right costs 1")
+;;;               "Moving right should cost 1")
 ;;; (check-equal? (movement-cost '(0 0) '(1 0)) 5
-;;;               "Moving down costs 5")
+;;;               "Moving down should cost 5")
 ;;; (check-equal? (movement-cost '(2 2) '(2 1)) 1
-;;;               "Moving left costs 1")
+;;;               "Moving left should cost 1")
 ;;; (check-equal? (movement-cost '(2 2) '(1 2)) 5
-;;;               "Moving up costs 5")
+;;;               "Moving up should cost 5")
 ;;;
 #;
 (define (movement-cost pos1 pos2)
@@ -90,13 +90,13 @@
 ;;; col  : the column index
 ;;;
 ;;; (check-equal? (in-bounds? map-grid 0 0) #t
-;;;               "Top-left corner is in bounds")
+;;;               "Top-left corner should be in bounds")
 ;;; (check-equal? (in-bounds? map-grid 4 4) #t
-;;;               "Bottom-right corner is in bounds")
+;;;               "Bottom-right corner should be in bounds")
 ;;; (check-equal? (in-bounds? map-grid 5 5) #f
-;;;               "Position outside grid is out of bounds")
+;;;               "Position outside grid should be out of bounds")
 ;;; (check-equal? (in-bounds? map-grid -1 0) #f
-;;;               "Negative row is out of bounds")
+;;;               "Negative row should be out of bounds")
 ;;;
 #;
 (define (in-bounds? grid row col)
@@ -113,11 +113,11 @@
 ;;; pos  : (row col) position to check
 ;;;
 ;;; (check-equal? (passable? map-grid '(0 0)) #t
-;;;               "Goal position is passable")
+;;;               "Goal position should be passable")
 ;;; (check-equal? (passable? map-grid '(1 1)) #f
-;;;               "Wall is not passable")
+;;;               "Wall should not not passable")
 ;;; (check-equal? (passable? map-grid '(2 2)) #t
-;;;               "Start position is passable")
+;;;               "Start position should be passable")
 ;;;
 #;
 (define (passable? grid pos)
@@ -137,7 +137,7 @@
 ;;; pos  : (row col) current position
 ;;;
 ;;; (check-equal? (get-neighbours map-grid '(0 0)) '((1 0) (0 1))
-;;;               "Top-left corner has 2 valid neighbours")
+;;;               "Top-left corner should have 2 valid neighbours")
 ;;;
 #;
 (define (get-neighbours grid pos)
@@ -155,7 +155,9 @@
 ;;; pos2 : (row col) second position
 ;;;
 ;;; (check-equal? (manhattan-distance '(0 0) '(2 2)) 4
-;;;               "Distance from (0,0) to (2,2) is 4")
+;;;               "Distance from (0,0) to (2,2) should be 4")
+;;; (check-equal? (manhattan-distance '(2 2) '(0 0)) 4
+;;;               "Distance for (2,2) to (0,0) should be 4")
 ;;;
 #;
 (define (manhattan-distance pos1 pos2)
@@ -180,16 +182,16 @@
 ;;;
 ;;; (check-equal? (reconstruct-path '(0 0) (list (cons '(0 0) '())))
 ;;;               '((0 0))
-;;;               "Single node path (goal is start)")
+;;;               "Path should be single node (goal is start)")
 ;;; (check-equal? (reconstruct-path '(0 1) (list (cons '(0 1) '(0 0))
 ;;;                                              (cons '(0 0) '())))
 ;;;               '((0 0) (0 1))
-;;;               "Two node path")
+;;;               "Path should be two nodes")
 ;;; (check-equal? (reconstruct-path '(0 2) (list (cons '(0 2) '(0 1))
 ;;;                                              (cons '(0 1) '(0 0))
 ;;;                                              (cons '(0 0) '())))
 ;;;               '((0 0) (0 1) (0 2))
-;;;               "Three node path")
+;;;               "Path should be three nodes")
 ;;;
 (define (reconstruct-path goal-pos parent-map)
   (let loop ([current-pos goal-pos]
@@ -204,16 +206,16 @@
 
 (check-equal? (reconstruct-path '(0 0) (list (cons '(0 0) '())))
               '((0 0))
-              "Single node path (goal is start)")
+              "Path should be single node (goal is start)")
 (check-equal? (reconstruct-path '(0 1) (list (cons '(0 1) '(0 0))
                                              (cons '(0 0) '())))
               '((0 0) (0 1))
-              "Two node path")
+              "Path should be two nodes")
 (check-equal? (reconstruct-path '(0 2) (list (cons '(0 2) '(0 1))
                                              (cons '(0 1) '(0 0))
                                              (cons '(0 0) '())))
               '((0 0) (0 1) (0 2))
-              "Three node path")
+              "Path should be three nodes")
 
 ;;; a-star : List List List -> List
 ;;;
@@ -254,15 +256,15 @@
 ;;; goal  : (row col) goal position
 ;;;
 ;;; (check-equal? (a-star map-grid '(0 0) '(0 0)) '((0 0))
-;;;               "A* handles start equals goal")
+;;;               "A* should handle start equals goal")
 ;;; (check-equal? (a-star map-grid '(0 0) '(0 1)) '((0 0) (0 1))
-;;;               "A* finds path between adjacent positions")
+;;;               "A* should find path between adjacent positions")
 ;;; (check-equal? (car (a-star map-grid '(2 2) '(0 0))) '(2 2)
-;;;               "Path starts at start position")
+;;;               "Path should start at start position")
 ;;; (check-equal? (last (a-star map-grid '(2 2) '(0 0))) '(0 0)
-;;;               "Path ends at goal position")
+;;;               "Path should end at goal position")
 ;;; (check-equal? (a-star map-grid '(2 2) '(1 2)) #f
-;;;               "A* returns #f when no path exists to blocked position")
+;;;               "A* should return #f when no path exists to blocked position")
 ;;;
 #;
 (define (a-star grid start goal)
