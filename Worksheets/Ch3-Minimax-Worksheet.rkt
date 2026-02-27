@@ -41,11 +41,11 @@
 
 ;;; Example mid-game board for minimax demonstration
 ;;; Visual representation:
-;;;   x o _
+;;;   x o x
 ;;;   _ x _
-;;;   _ _ o
+;;;   o _ o
 ;;;
-(define example-midgame '(x o _ _ x _ _ _ o))
+(define example-midgame '(x o x _ x _ o _ o))
 
 ;;; generate-next-boards : List -> List-of-Boards
 ;;;
