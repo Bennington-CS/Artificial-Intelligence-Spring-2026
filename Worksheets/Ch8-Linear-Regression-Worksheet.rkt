@@ -141,7 +141,7 @@
 ;;;
 #;
 (define (x-minus-mean-x-times-y-minus-mean-y data)
-  (map * (x-minus-mean-x data) (y-minus-mean-y data)))
+  ...)
 
 ;;;;
 ;;;; Linear Regression
