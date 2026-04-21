@@ -59,7 +59,7 @@
 
 
 ;;; Specify which dataset to use
-(define dataset (shuffle iris-data-small))
+(define dataset (shuffle iris-data-large))
 
 ;;; Feature ranges for min-max scaling, one (min max) pair for each feature.
 (define feature-ranges
