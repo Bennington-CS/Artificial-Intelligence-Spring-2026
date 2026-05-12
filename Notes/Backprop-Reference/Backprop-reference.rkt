@@ -37,6 +37,7 @@
   '(((0.2 0.4)
      (0.3 0.1))
     ((0.5 -0.3))))
+
 ;;;;
 ;;;; Activation Functions
 ;;;;
@@ -1304,6 +1305,7 @@ use the wine dataset, which introduces some complexity, but is still pretty easy
 ;;; topology        : layer sizes, e.g. '(10 3) for 10 hidden → 3 outputs
 ;;; activation      : activation function (e.g. sigmoid)
 ;;; activation-prime: derivative of the activation (e.g. sigmoid-derivative)
+;;; learning-rate   : sets the learning rate of the weight updates
 ;;;
 (define (train num-epochs topology activation activation-prime learning-rate)
   (let* (;; Load data and compute feature ranges once for the whole run
@@ -1354,9 +1356,12 @@ use the wine dataset, which introduces some complexity, but is still pretty easy
                                  (+ loss-sum loss)
                                  (+ sample 1))))))))))
 
-(train 100 '(10 3) sigmoid sigmoid-derivative 1)
+; (train 100 '(10 3) sigmoid sigmoid-derivative 1)
 ; (train 100 '(20 20 3) sigmoid sigmoid-derivative 1)
-; (train 100 '(10 10 3) relu relu-derivative 0.01)
+(train 100 '(20 20 20 20 3) sigmoid sigmoid-derivative 1)
+; (train 100 '(10 10 3) relu relu-derivative 1)
 ; (train 100 '(10 10 3) leaky-relu leaky-relu-derivative 0.01)
 ; (train 1000 '(10 10 3) tanh tanh-derivative 0.01)
+; (train 100 '(20 20 3) sigmoid sigmoid-derivative 1)
+
 
