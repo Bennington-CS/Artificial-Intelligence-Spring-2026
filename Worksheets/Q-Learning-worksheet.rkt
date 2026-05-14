@@ -28,15 +28,15 @@
 (define agent      'A)
 
 ;;; Grid dimensions
-(define parking-lot-size-x 10)  ; number of rows
-(define parking-lot-size-y 10)  ; number of columns
+(define grid-size-x 10)  ; number of rows
+(define grid-size-y 10)  ; number of columns
 
 ;;; Reward values
-(define parking-lot-empty-reward           100)
-(define parking-lot-goal-reward            500)
-(define parking-lot-obstacle-car-reward   -100)
-(define parking-lot-obstacle-person-reward -500)
-(define parking-lot-out-of-bounds-reward  -150)
+(define grid-empty-reward           100)
+(define grid-goal-reward            500)
+(define grid-obstacle-car-reward   -100)
+(define grid-obstacle-person-reward -500)
+(define grid-out-of-bounds-reward  -150)
 
 ;;; Action symbols
 (define command-north 'north)
@@ -64,9 +64,9 @@
 ;;;
 ;;; Note: The agent start position is stored as EMPTY in the grid because the
 ;;; agent's position is tracked separately.  The grid represents the static
-;;; environment (what's "on the parking-lot").
+;;; environment (what's "on the grid").
 ;;;
-(define parking-lot
+(define grid
   ;  0 1 2 3 4 5 6 7 8 9
   '((- C C C - C - - C -)   ; Row 0
     (- P - - - - - P - P)   ; Row 1
@@ -96,22 +96,22 @@
 ;;; Look up the cell value at position (x, y) in the grid.
 ;;; Strategy: index into the nested list structure.
 ;;;
-;;; grid : the parking-lot grid (list of rows)
+;;; grid : the grid grid (list of rows)
 ;;; x    : row index (0-based)
 ;;; y    : column index (0-based)
 ;;;
 (define (grid-ref grid x y)
   (void))
 
-(check-equal? (grid-ref parking-lot 0 0) '-
+(check-equal? (grid-ref grid 0 0) '-
               "Top-left corner is empty")
-(check-equal? (grid-ref parking-lot 0 1) 'C
+(check-equal? (grid-ref grid 0 1) 'C
               "Row 0, col 1 is a car")
-(check-equal? (grid-ref parking-lot 4 7) '-
+(check-equal? (grid-ref grid 4 7) '-
               "Agent start position is empty in the grid")
-(check-equal? (grid-ref parking-lot 9 5) 'G
+(check-equal? (grid-ref grid 9 5) 'G
               "Goal position")
-(check-equal? (grid-ref parking-lot 1 1) 'P
+(check-equal? (grid-ref grid 1 1) 'P
               "Pedestrian at (1,1)")
 
 ;;;;
@@ -191,7 +191,7 @@
 ;;; Convert a (row, col) position to a unique state number.
 ;;; Strategy: linearize the 2D position into a single integer.
 ;;;
-;;; The state space has parking-lot-size-x × parking-lot-size-y = 100 possible states,
+;;; The state space has grid-size-x × grid-size-y = 100 possible states,
 ;;; numbered 0 through 99.
 ;;;
 ;;; agent-x : row of the agent
@@ -246,7 +246,7 @@
 ;;; From the book's pseudocode:
 ;;;   - Compute next_x, next_y from action
 ;;;   - If in bounds: reward = cost_movement(next_x, next_y), move there
-;;;   - If out of bounds: reward = parking-lot_OUT_OF_BOUNDS_REWARD, stay put
+;;;   - If out of bounds: reward = grid_OUT_OF_BOUNDS_REWARD, stay put
 ;;;
 ;;; Returns three values: new-agent-x, new-agent-y, reward.
 ;;;
@@ -300,22 +300,22 @@
   (displayln "")
   (displayln "=== Q-Learning Simulation Environment ===")
   (displayln "")
-  (displayln (format "Grid size: ~a × ~a" parking-lot-size-x parking-lot-size-y))
+  (displayln (format "Grid size: ~a × ~a" grid-size-x grid-size-y))
   (displayln (format "Agent start: (~a, ~a)  [state ~a]"
                      agent-start-x agent-start-y
                      (get-state agent-start-x agent-start-y)))
   (displayln (format "Goal:        (~a, ~a)  [state ~a]"
                      goal-x goal-y
                      (get-state goal-x goal-y)))
-  (displayln (format "State space: ~a states" (* parking-lot-size-x parking-lot-size-y)))
+  (displayln (format "State space: ~a states" (* grid-size-x grid-size-y)))
   (displayln (format "Actions:     ~a" actions))
   (displayln "")
   (displayln "Reward structure:")
-  (displayln (format "  Empty cell:     ~a" parking-lot-empty-reward))
-  (displayln (format "  Goal:           ~a" parking-lot-goal-reward))
-  (displayln (format "  Car:            ~a" parking-lot-obstacle-car-reward))
-  (displayln (format "  Pedestrian:     ~a" parking-lot-obstacle-person-reward))
-  (displayln (format "  Out of bounds:  ~a" parking-lot-out-of-bounds-reward))
+  (displayln (format "  Empty cell:     ~a" grid-empty-reward))
+  (displayln (format "  Goal:           ~a" grid-goal-reward))
+  (displayln (format "  Car:            ~a" grid-obstacle-car-reward))
+  (displayln (format "  Pedestrian:     ~a" grid-obstacle-person-reward))
+  (displayln (format "  Out of bounds:  ~a" grid-out-of-bounds-reward))
   (displayln "")
 
   ;; Quick demo: move the agent from start in each direction
@@ -326,6 +326,6 @@
                          action ax ay reward
                          (if (and (equal? ax agent-start-x) (equal? ay agent-start-y))
                              "OUT OF BOUNDS"
-                             (grid-ref parking-lot ax ay)))))))
+                             (grid-ref grid ax ay)))))))
 
 ; (run)
