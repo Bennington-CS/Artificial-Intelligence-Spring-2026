@@ -34,9 +34,9 @@
 ;;; Reward values
 (define grid-empty-reward           100)
 (define grid-goal-reward            500)
-(define grid-obstacle-car-reward   -100)
-(define grid-obstacle-person-reward -500)
-(define grid-out-of-bounds-reward  -150)
+(define grid-obstacle-car-reward    -100)
+(define grid-obstacle-person-reward -100)
+(define grid-out-of-bounds-reward   -150)
 
 ;;; Action symbols
 (define command-north 'north)
@@ -260,7 +260,7 @@
 ;; Moving north from (4,7) → (3,7) which is a car → -100
 (let-values ([(ax ay reward) (move-agent 4 7 'north)])
   (check-equal? (list ax ay reward) '(3 7 -100)
-                "North from agent start → empty cell, +100"))
+                "North from agent start → car, +100"))
 
 ;; Moving south from (4,7) → (5,7) which is a car → -100
 (let-values ([(ax ay reward) (move-agent 4 7 'south)])
