@@ -2,7 +2,7 @@
 (require rackunit)
 
 ;;;;;
-;;;;; Chapter 9: Q-Learning — Parking Lot Simulation
+;;;;; Chapter 10: Q-Learning — Parking Lot Simulation
 ;;;;; Reference Implementation (Part 1: Environment)
 ;;;;;
 ;;;;; This file implements the simulation environment for Q-learning:
@@ -35,7 +35,7 @@
 (define grid-size-y 10)  ; number of columns
 
 ;;; Reward values
-(define grid-empty-reward            -1)
+(define grid-empty-reward           -1)
 (define grid-goal-reward             500)
 (define grid-obstacle-car-reward    -1000)
 (define grid-obstacle-person-reward -1000)
@@ -82,8 +82,8 @@
 ;;;
 (define grid
   ;  0 1 2 3 4 5 6 7 8 9
-  '((- C C C - C - - c -)   ; Row 0
-    (- P - - - - - P - P)   ; Row 1
+  '((- C C C - C - - C -)   ; Row 0
+    (- P - - - - - - - P)   ; Row 1
     (- C C - - C C - - C)   ; Row 2
     (- - - - - - C C - C)   ; Row 3
     (C P P C - - P - - -)   ; Row 4 (agent start is empty)
